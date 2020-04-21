@@ -26,9 +26,9 @@ FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_string( 'model','../data/model',
                             """Directory for model checkpoints""" )
 tf.app.flags.DEFINE_string( 'lexicon',None,
-			    """File containing lexicon of image words""" )
+                """File containing lexicon of image words""" )
 tf.app.flags.DEFINE_float( 'lexicon_prior',None,
-			    """Prior bias [0,1] for lexicon word""" )
+                """Prior bias [0,1] for lexicon word""" )
 
 tf.app.flags.DEFINE_integer( 'batch_size',2**9,
                              """Eval batch size""" )

@@ -35,9 +35,9 @@ tf.app.flags.DEFINE_string( 'model','../data/model',
 tf.app.flags.DEFINE_boolean( 'print_score', False,
                              """Print log probability scores with predictions""" )
 tf.app.flags.DEFINE_string( 'lexicon','',
-			    """File containing lexicon of image words""" )
+                """File containing lexicon of image words""" )
 tf.app.flags.DEFINE_float( 'lexicon_prior',None,
-			    """Prior bias [0,1] for lexicon word""" )
+                """Prior bias [0,1] for lexicon word""" )
 
 
 tf.logging.set_verbosity( tf.logging.INFO )

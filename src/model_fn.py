@@ -240,8 +240,7 @@ def _get_seq_err_ops( batch_num_sequence_errors, label_length ):
 
 
 def _get_dictionary_tensor( dictionary_path, charset ):
-    return tf.sparse_tensor_to_dense( tf.to_int32(
-	dictionary_from_file( dictionary_path, charset )))
+    return tf.sparse_tensor_to_dense( tf.to_int32(dictionary_from_file( dictionary_path, charset )))
 
 def _get_lexicon_output( rnn_logits, sequence_length, lexicon ):
     """Create lexicon-restricted output ops
@@ -329,7 +328,7 @@ def _get_output( rnn_logits, sequence_length, lexicon, lexicon_prior ):
        seq_prob: Score of prediction
     """
     with tf.name_scope("test"):
-    if lexicon:
+        if lexicon:
             ctc_blank = (rnn_logits.shape[2]-1)
             lex_prediction,lex_seq_prob = _get_lexicon_output(rnn_logits,
                                                       sequence_length, lexicon )
@@ -365,7 +364,7 @@ def _get_output( rnn_logits, sequence_length, lexicon, lexicon_prior ):
                 eos_token=ctc_blank )
             # (2) CTCWordBeamSearch returns only top match, so convert to list
             prediction = [prediction]
-	else:
+        else:
             prediction, seq_prob = _get_open_output(rnn_logits, sequence_length)
             
     return prediction, seq_prob

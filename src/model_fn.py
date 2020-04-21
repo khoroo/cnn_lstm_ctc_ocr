@@ -329,7 +329,7 @@ def _get_output( rnn_logits, sequence_length, lexicon, lexicon_prior ):
        seq_prob: Score of prediction
     """
     with tf.name_scope("test"):
-	if lexicon:
+    if lexicon:
             ctc_blank = (rnn_logits.shape[2]-1)
             lex_prediction,lex_seq_prob = _get_lexicon_output(rnn_logits,
                                                       sequence_length, lexicon )

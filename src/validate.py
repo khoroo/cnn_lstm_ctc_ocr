@@ -103,12 +103,12 @@ def main(argv=None):
     while True:
         try:
             results = next( predictions )
-            print 'results =',results
+            print('results =',results)
             pred_str = charset.label_to_string( results['labels'] )
             if FLAGS.print_score:
-                print pred_str, results['score'][0]
+                print(pred_str, results['score'][0])
             else:
-                print pred_str
+                print(pred_str)
         except StopIteration:
             sys.exit()
     

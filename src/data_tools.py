@@ -284,12 +284,12 @@ def normalize_box(image, rect, max_height_width_ratio=None):
     if max_height_width_ratio and height/width > max_height_width_ratio:
         width = np.ceil(height / max_height_width_ratio)
     
-    w_pad = int(32 - (width % 32))
-    h_pad = int(32 - (height % 32))
-    if w_pad < h_pad:
-        width += w_pad
-    else:
-        height += h_pad
+    # w_pad = int(32 - (width % 32))
+    # h_pad = int(32 - (height % 32))
+    # if w_pad < h_pad:
+        # width += w_pad
+    # else:
+        # height += h_pad
         
         
 
@@ -314,5 +314,8 @@ def normalize_box(image, rect, max_height_width_ratio=None):
     matrix = cv2.getRotationMatrix2D(center=center, angle=angle, scale=1)
     image_rot = cv2.warpAffine(src=image, M=matrix, dsize=(x1,y1))
     image_rot_crop = image_rot[y0:y1, x0:x1]
+    
+    print(image_rot_crop.size)
+    print(image_rot_crop)
 
     return image_rot_crop

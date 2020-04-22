@@ -42,11 +42,39 @@ tf.app.flags.DEFINE_float( 'lexicon_prior',None,
 
 tf.logging.set_verbosity( tf.logging.INFO )
 
+def _add_margin(pil_img, top, right, bottom, left, color):
+    width, height = pil_img.size
+    new_width = width + right + left
+    new_height = height + top + bottom
+    result = Image.new(pil_img.mode, (new_width, new_height), color)
+    result.paste(pil_img, (left, top))
+    return result
+
+def _process_padding(im, divby=32):
+    width,height = im.size
+    if (width*height) % divby == 0:
+        return im
+    top, right, bottom, left = 0, 0, 0, 0
+    w_pad = divby - (width % divby)
+    h_pad = divby - (height % divby)
+    if w_pad < h_pad:
+        if (w_pad % 2) == 0:
+            right = left = int(w_pad/2)
+        else:
+            left = int(w_pad)
+    else:
+        if (h_pad % 2) == 0:
+            top = bottom = int(h_pad/2)
+        else:
+            bottom = int(h_pad)
+    return _add_margin(im, top, right, bottom, left, (255,255,255))
+    
 
 def _get_image( filename ):
     """Load image data for placement in graph"""
 
-    image = Image.open( filename ) 
+    image = Image.open( filename )
+    image = _process_padding(image)
     image = np.array( image )
     # in mjsynth, all three channels are the same in these grayscale-cum-RGB data
     image = image[:,:,:1] # so just extract first channel, preserving 3D shape

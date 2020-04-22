@@ -84,7 +84,7 @@ def _get_image( filename ):
     image = np.array( image )
     # in mjsynth, all three channels are the same in these grayscale-cum-RGB data
     image = image[:,:,:1] # so just extract first channel, preserving 3D shape
-
+    print(image.shape)
     return image
 
 def _get_stdin():
@@ -105,11 +105,12 @@ def _get_stdin():
 
 def _get_input():
     
-    # dataset = _get_stdin()
+    dataset = _get_stdin()
     
-    rects_file = '/content/output/Burnley/1909056140151.txt'
-    image_file = '/content/ChimneyData/Sample/Raw/Burnley/1909056140151.tif'
-    dataset = _get_prediction_dataset(image_file, rects_file)
+    
+    # rects_file = '/content/output/Burnley/1909056140151.txt'
+    # image_file = '/content/ChimneyData/Sample/Raw/Burnley/1909056140151.tif'
+    # dataset = _get_prediction_dataset(image_file, rects_file)
     
     # mjsynth input images need preprocessing transformation (shape, range)
     dataset = dataset.map( mjsynth.preprocess_image )

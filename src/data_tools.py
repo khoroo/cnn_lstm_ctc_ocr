@@ -284,6 +284,7 @@ def normalize_box(image, rect, max_height_width_ratio=None):
     if max_height_width_ratio and height/width > max_height_width_ratio:
         width = np.ceil(height / max_height_width_ratio)
     
+    print('dims:',width,height)
     # Padding for mjsynth
     w_pad = 32 - (width % 32)
     width += w_pad

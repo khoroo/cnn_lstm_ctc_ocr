@@ -52,7 +52,7 @@ def _add_margin(pil_img, top, right, bottom, left, color):
 
 def _process_padding(im, divby=32):
     width,height = im.size
-    if (width*height) % divby == 0:
+    if ((width*height) % divby) == 0:
         return im
     top, right, bottom, left = 0, 0, 0, 0
     w_pad = divby - (width % divby)
@@ -67,7 +67,9 @@ def _process_padding(im, divby=32):
             top = bottom = int(h_pad/2)
         else:
             bottom = int(h_pad)
-    return _add_margin(im, top, right, bottom, left, (255,255,255))
+    result = _add_margin(im, top, right, bottom, left, (255,255,255))
+    print('result size',result.size)
+    return result
     
 
 def _get_image( filename ):

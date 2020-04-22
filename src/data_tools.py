@@ -284,6 +284,7 @@ def normalize_box(image, rect, max_height_width_ratio=None):
     if max_height_width_ratio and height/width > max_height_width_ratio:
         width = np.ceil(height / max_height_width_ratio)
     
+    print('dims',width,height)
     # w_pad = int(32 - (width % 32))
     # h_pad = int(32 - (height % 32))
     # if w_pad < h_pad:
@@ -317,7 +318,7 @@ def normalize_box(image, rect, max_height_width_ratio=None):
     
     #mjsynth
     image_rot_crop = image_rot_crop[:,:,:1]
-    print('here!',image_rot_crop.shape)
+    print('image_rot_crop_dims',image_rot_crop.shape)
     
     
     return image_rot_crop

@@ -42,15 +42,16 @@ tf.app.flags.DEFINE_float( 'lexicon_prior',None,
 
 tf.logging.set_verbosity( tf.logging.INFO )
 
-def _add_margin(pil_img, top, right, bottom, left, color):
-    width, height = pil_img.size
-    new_width = width + right + left
-    new_height = height + top + bottom
-    result = Image.new(pil_img.mode, (new_width, new_height), color)
-    result.paste(pil_img, (left, top))
-    return result
 
 def _process_padding(im, divby=32):
+    def _add_margin(pil_img, top, right, bottom, left, color):
+        width, height = pil_img.size
+        new_width = width + right + left
+        new_height = height + top + bottom
+        result = Image.new(pil_img.mode, (new_width, new_height), color)
+        result.paste(pil_img, (left, top))
+        return result
+    
     width,height = im.size
     if ((width*height) % divby) == 0:
         return im
@@ -85,8 +86,7 @@ def _get_image( filename ):
 
     return image
 
-
-def _get_input():
+def _get_stdin():
     """Create a dataset of images by reading from stdin"""
 
     # Eliminate any trailing newline from filename
@@ -100,13 +100,55 @@ def _get_input():
         image_data = _get_image( line.rstrip() )
         temp_dataset = tf.data.Dataset.from_tensors( image_data )
         dataset = dataset.concatenate( temp_dataset )
+    return dataset
 
+def _get_input():
+    
+    # dataset = _get_stdin()
+    
+    rects_file = '/content/output/Burnley/1909056140151.txt'
+    image_file = '/content/ChimneyData/Sample/Raw/Burnley/1909056140151.tif'
+    dataset = _get_prediction_dataset()
+    
     # mjsynth input images need preprocessing transformation (shape, range)
     dataset = dataset.map( mjsynth.preprocess_image )
 
     # pack results for model_fn.predict 
     dataset = dataset.map ( pipeline.pack_image )
     return dataset
+
+def _get_prediction_dataset(image_file, rects_file):
+    """
+    Get a dataset from the lines in rects_file where each element is a
+    tuple with the predicted rectangle (4x2 float32 tensor with points in CCW
+    and bottom-left as the first point) and the cropped, rotated image (RGB uint8)
+    corresponding to that rectangle as extracted from image_file.
+
+    Parameters
+      image_file: Path to the image to read rectangles from
+      rects_file: Path to the file containing predicted rectangles
+      **kwargs:   Optional arguments to data_tools.normalize_box
+    Returns
+      dataset:    tf.data.Dataset with (rectangle, image) tuples 
+    """
+    
+    def gen_rect_image(): # Generator for yielding (rect,cropped) tuples
+        image = np.array(Image.open(image_file).convert(mode='RGB'))
+        rects = data_tools.parse_boxes_from_text(rects_file,slice_first=True)[0]
+
+        for rect in rects:
+            cropped = data_tools.normalize_box(image,rect)
+            yield cropped
+
+    # Construct the Dataset object from the generator
+    dataset = tf.data.Dataset.from_generator (
+        generator=gen_rect_image,
+        output_types=(tf.uint8),
+        output_shapes=(tf.TensorShape([None,None,3])))
+    
+
+    return dataset
+
 
 
 def _get_config():

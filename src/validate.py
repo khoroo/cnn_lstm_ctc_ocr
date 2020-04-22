@@ -108,7 +108,7 @@ def _get_input():
     
     rects_file = '/content/output/Burnley/1909056140151.txt'
     image_file = '/content/ChimneyData/Sample/Raw/Burnley/1909056140151.tif'
-    dataset = _get_prediction_dataset()
+    dataset = _get_prediction_dataset(image_file, rects_file)
     
     # mjsynth input images need preprocessing transformation (shape, range)
     dataset = dataset.map( mjsynth.preprocess_image )

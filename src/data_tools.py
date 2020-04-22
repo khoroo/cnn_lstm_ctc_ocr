@@ -315,8 +315,9 @@ def normalize_box(image, rect, max_height_width_ratio=None):
     image_rot = cv2.warpAffine(src=image, M=matrix, dsize=(x1,y1))
     image_rot_crop = image_rot[y0:y1, x0:x1]
     
-    print('here!')
-    print(image_rot_crop.size)
-    print(image_rot_crop)
-
+    #mjsynth
+    image_rot_crop = image_rot_crop[:,:,:1]
+    print('here!',image_rot_crop.shape)
+    
+    
     return image_rot_crop

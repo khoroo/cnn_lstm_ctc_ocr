@@ -77,9 +77,6 @@ def _get_input():
     return dataset
 
 
-def _tmp_input():
-    return mjsynth.get_dataset([ '/content/cnn_lstm_ctc_ocr/data/test', '*', 1, 1 ])
-
 def _get_config():
     """Setup session config to soften device placement"""
 
@@ -100,8 +97,7 @@ def main(argv=None):
                                              FLAGS.lexicon_prior), 
                                          model_dir=FLAGS.model )
     
-    # predictions = classifier.predict( input_fn=_get_input )
-    predictions = classifier.predict( input_fn=_tmp_input)
+    predictions = classifier.predict( input_fn=_get_input )
     
     # Get all the predictions in string format
     while True:

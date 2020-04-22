@@ -74,7 +74,9 @@ def _get_image( filename ):
     """Load image data for placement in graph"""
 
     image = Image.open( filename )
+    print(image.size)
     image = _process_padding(image)
+    print(image.size)
     image = np.array( image )
     # in mjsynth, all three channels are the same in these grayscale-cum-RGB data
     image = image[:,:,:1] # so just extract first channel, preserving 3D shape

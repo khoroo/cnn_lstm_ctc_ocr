@@ -27,6 +27,7 @@ import charset
 
 import mjsynth
 import pipeline
+import data_tools
 
 FLAGS = tf.app.flags.FLAGS
 

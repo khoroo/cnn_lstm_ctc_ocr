@@ -55,8 +55,8 @@ def _process_padding(im, divby=32):
     if ((width*height) % divby) == 0:
         return im
     top, right, bottom, left = 0, 0, 0, 0
-    w_pad = divby - (width % divby)
-    h_pad = divby - (height % divby)
+    w_pad = divby - (width % divby) - 1
+    h_pad = divby - (height % divby) - 1
     if w_pad < h_pad:
         if (w_pad % 2) == 0:
             right = left = int(w_pad/2)

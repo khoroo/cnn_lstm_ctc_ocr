@@ -284,17 +284,12 @@ def normalize_box(image, rect, max_height_width_ratio=None):
     if max_height_width_ratio and height/width > max_height_width_ratio:
         width = np.ceil(height / max_height_width_ratio)
     
-    width = np.ceil(width)
-    height = np.ceil(height)
-    if ((width*height) % 32) != 0:
-        print('here', width, height)
-        w_pad = int(32 - (width % 32))
-        h_pad = int(32 - (height % 32))
-        if w_pad < h_pad:
-            width += w_pad
-        else:
-            height += h_pad
-        print('after', width, height)
+    w_pad = int(32 - (width % 32))
+    h_pad = int(32 - (height % 32))
+    if w_pad < h_pad:
+        width += w_pad
+    else:
+        height += h_pad
         
         
 

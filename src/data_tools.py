@@ -286,11 +286,7 @@ def normalize_box(image, rect, max_height_width_ratio=None):
     
     # Padding for mjsynth
     w_pad = 32 - (width % 32)
-    h_pad = 32 - (height % 32)
-    if w_pad < h_pad:
-        width += w_pad - 1
-    else:
-        height += h_pad - 1
+    width += w_pad - 1
         
         
 

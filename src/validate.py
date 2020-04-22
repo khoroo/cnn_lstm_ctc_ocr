@@ -70,7 +70,6 @@ def _process_padding(im, divby=32):
         else:
             bottom = int(h_pad)
     result = _add_margin(im, top, right, bottom, left, (255,255,255))
-    print('result size',result.size)
     return result
     
 
@@ -78,13 +77,10 @@ def _get_image( filename ):
     """Load image data for placement in graph"""
 
     image = Image.open( filename )
-    print(image.size)
     image = _process_padding(image)
-    print(image.size)
     image = np.array( image )
     # in mjsynth, all three channels are the same in these grayscale-cum-RGB data
     image = image[:,:,:1] # so just extract first channel, preserving 3D shape
-    print(image.shape)
     return image
 
 def _get_stdin():
@@ -146,7 +142,7 @@ def _get_prediction_dataset(image_file, rects_file):
     dataset = tf.data.Dataset.from_generator (
         generator=gen_rect_image,
         output_types=(tf.uint8),
-        output_shapes=(tf.TensorShape([None,None,3])))
+        output_shapes=(tf.TensorShape([None,None,1])))
     
 
     return dataset

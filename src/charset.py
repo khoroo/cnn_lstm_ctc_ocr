@@ -21,7 +21,7 @@
 The string of valid output characters for the model
 Any example with a character not found here will generate a runtime error
 """
-out_charset="JD\'FdktgahKRLNeyT-rlGwMnmEHUfCXPQzqobupi\"WxBOvcIVjZsSAY"
+out_charset="123456789JD\'FdktgahKRLNeyT-rlGwMnmEHUfCXPQzqobupi\"WxBOvcIVjZsSAY"
 
 
 """

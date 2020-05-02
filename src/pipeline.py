@@ -103,7 +103,7 @@ def get_data( use_static_data,
                                         padded_shapes=dataset.output_shapes )
     
     # Update to account for batching
-    num_buffered_elements = num_threads * 2
+    num_buffered_elements = int(num_threads * 2)
     
     dataset = dataset.prefetch( num_buffered_elements )
     

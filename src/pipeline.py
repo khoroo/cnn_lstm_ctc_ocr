@@ -50,7 +50,7 @@ def get_data( use_static_data,
                 in mjsynth.py
     """    
     # Elements to be buffered
-    num_buffered_elements = num_threads * batch_size * 2
+    num_buffered_elements = int(num_threads * batch_size * 2)
 
     # Get correct import and args for given pipeline
     # `dpipe` will be a variable for the package name

@@ -32,7 +32,7 @@ tf.app.flags.DEFINE_string('tune_from','',
 tf.app.flags.DEFINE_string('tune_scope','',
                           """Variable scope for training""")
 
-tf.app.flags.DEFINE_integer('batch_size',2**5,
+tf.app.flags.DEFINE_integer('batch_size',int(2**5),
                             """Mini-batch size""")
 tf.app.flags.DEFINE_float('learning_rate',1e-4,
                           """Initial learning rate""")
@@ -40,11 +40,11 @@ tf.app.flags.DEFINE_float('momentum',0.9,
                           """Optimizer gradient first-order momentum""")
 tf.app.flags.DEFINE_float('decay_rate',0.9,
                           """Learning rate decay base""")
-tf.app.flags.DEFINE_float('decay_steps',2**16,
+tf.app.flags.DEFINE_float('decay_steps',int(2**16),
                           """Learning rate decay exponent scale""")
 tf.app.flags.DEFINE_boolean('decay_staircase',False,
                           """Staircase learning rate decay by integer division""")
-tf.app.flags.DEFINE_integer('max_num_steps', 2**21,
+tf.app.flags.DEFINE_integer('max_num_steps', int(2**21),
                             """Number of optimization steps to run""")
 tf.app.flags.DEFINE_integer('save_checkpoint_secs', 120,
                             """Interval between daving checkpoints""")

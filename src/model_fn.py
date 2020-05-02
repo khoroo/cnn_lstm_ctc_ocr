@@ -27,7 +27,7 @@ import utils
 # Beam search width for prediction and evaluation modes using both the
 # custom, lexicon-driven CTCWordBeamSearch module and the open-lexicon
 # tf.nn.ctc_beam_search_decoder
-_ctc_beam_width = 2**7
+_ctc_beam_width = int(2**7)
 
 def _get_image_info( features, mode ):
     """Calculates the logits and sequence length"""

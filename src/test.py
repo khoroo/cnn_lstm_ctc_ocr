@@ -30,7 +30,7 @@ tf.app.flags.DEFINE_string( 'lexicon',None,
 tf.app.flags.DEFINE_float( 'lexicon_prior',None,
                 """Prior bias [0,1] for lexicon word""" )
 
-tf.app.flags.DEFINE_integer( 'batch_size',2**9,
+tf.app.flags.DEFINE_integer( 'batch_size',int(2**9),
                              """Eval batch size""" )
 
 tf.app.flags.DEFINE_string( 'test_path','../data/',

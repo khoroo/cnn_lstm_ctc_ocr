@@ -33,7 +33,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 FLAGS = tf.app.flags.FLAGS
 
 
-tf.app.flags.DEFINE_integer( 'batch_size',2**9,
+tf.app.flags.DEFINE_integer( 'batch_size',int(2**9),
                              """Eval batch size""" )
 tf.app.flags.DEFINE_integer('eval_interval_secs', 120,
                              """Time between test runs""")

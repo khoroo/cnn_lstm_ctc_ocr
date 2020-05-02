@@ -65,7 +65,7 @@ tf.app.flags.DEFINE_integer('min_string_length',None,
 tf.app.flags.DEFINE_integer('max_string_length',None,
                             """Maximum allowable input string_length""")
 
-tf.app.flags.DEFINE_boolean('static_data', True,
+tf.app.flags.DEFINE_boolean('static_data', False,
                             """Whether to use static data 
                             (false for dynamic data)""")
 tf.app.flags.DEFINE_string('train_path','../data/train/',
@@ -75,7 +75,7 @@ tf.app.flags.DEFINE_string('filename_pattern','words-*',
 
 tf.app.flags.DEFINE_string('synth_config_file', None,
                            """Location of config file for map text synthesizer""")
-tf.app.flags.DEFINE_boolean('ipc_synth',True,
+tf.app.flags.DEFINE_boolean('ipc_synth',False,
                             """Use multi-process dynamic image synthesis""")
 
 

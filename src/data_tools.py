@@ -112,7 +112,7 @@ def parse_boxes_from_text(filename,slice_first=False):
             p3 = [float(v[4]), float(v[5])]
             p4 = [float(v[6]), float(v[7])]
             verts = np.asarray([p1, p2, p3, p4],dtype=np.float32)
-            label = json.loads(str(v[8]))
+            label = str(v[8])
             score = float(v[9]) if len(v)>9 else 0
             
             points.append(verts)
